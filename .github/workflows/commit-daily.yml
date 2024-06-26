@@ -1,0 +1,28 @@
+name: Daily Commit
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Esto programa el workflow para que se ejecute todos los días a la medianoche UTC.
+  workflow_dispatch: # Esto permite que el workflow se ejecute manualmente.
+
+jobs:
+  commit-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Make changes
+        run: |
+          echo "$(date)" > date.txt # Aquí puedes hacer los cambios que desees. Este es un ejemplo simple que escribe la fecha actual en un archivo.
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add .
+          git commit -m "Automated commit $(date)"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
