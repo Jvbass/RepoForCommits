@@ -3,14 +3,15 @@ name: Daily Commit
 on:
   schedule:
     - cron: '0 0 * * *' # Esto programa el workflow para que se ejecute todos los días a la medianoche UTC.
-  
+  workflow_dispatch: # Esto permite que el workflow se ejecute manualmente.
+
 jobs:
   commit-job:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3 # Actualiza a v3 para usar Node.js 20
 
       - name: Make changes
         run: |
