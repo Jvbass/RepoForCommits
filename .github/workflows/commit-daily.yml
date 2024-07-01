@@ -3,6 +3,7 @@ name: Daily Commit
 on:
   schedule:
     - cron: '0 0 * * *' # Esto programa el workflow para que se ejecute todos los días a la medianoche UTC.
+  workflow_dispatch: # Esto permite que el workflow se ejecute manualmente.
 
 jobs:
   commit-job:
